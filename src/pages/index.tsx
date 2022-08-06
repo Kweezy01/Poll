@@ -43,6 +43,7 @@ export default function Home() {
                     <img className='w-full' src={second_pokemon.data?.sprites?.front_default!} />
                     <div className='text-center capitalize mt-[-2rem]' >{second_pokemon.data?.name}</div>
                     <button className={BTN} onClick={() => vote_for_roundest(second)} >Rounder</button>
+                    <>Hi im new</>
                 </div>
             </div>
         </div>
