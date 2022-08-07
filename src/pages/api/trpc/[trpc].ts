@@ -1,9 +1,12 @@
 import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
-import { z } from 'zod';
-import { prisma } from '../../../utils/db';
+import { number, z } from 'zod';
 
 import { PokemonClient } from 'pokenode-ts';
+
+import db from "../../../utils/init_firebase"
+
+import { collection, addDoc } from "firebase/firestore"; 
 
 export const appRouter = trpc.router().query('get-pokemon', {
   input: z.object({ id: z.number() }),
@@ -20,14 +23,17 @@ export const appRouter = trpc.router().query('get-pokemon', {
     votedFor: z.number(),
     votedAgainst: z.number(),
   }),
-  async resolve({ input }) {
+  async resolve({ input }) {   
 
-    const write_vote_db = await prisma.vote.create({
-      data:
-        input
-    });
-
-    return { success: true, vote: write_vote_db };
+    try {
+      const docRef = await addDoc(collection(db, "Votes"), {
+        vote_for: input.votedFor,
+        vote_against: input.votedAgainst
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
   },
 });
 
