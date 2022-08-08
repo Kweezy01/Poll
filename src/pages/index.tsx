@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { trpc } from '@/utils/trpc';
 import { Mutation } from 'react-query';
 
+import Image from 'next/image';
+
 export default function Home() {
 
     const [options, setOpts] = useState([1, 2]);
@@ -42,14 +44,21 @@ export default function Home() {
             <div className="p-2" />
             <div className="border rounder p-8 flex justify-between max-w-2xl items-center">
                 <div className="w-64 h-64 flex flex-col items-center">
-                    <img className='w-full' src={first_pokemon.data?.sprites?.front_default!} />
+                    <Image
+                        src={first_pokemon.data?.sprites?.front_default!} 
+                        width={256}
+                        height={256}
+                        className='w-64 h-64'/>
                     <div className='text-center capitalize mt-[-2rem]' >{first_pokemon.data?.name}</div>
                     <button className={BTN} onClick={() => vote_for_roundest(first)} >Rounder</button>
                 </div>
                 <div className="p-8">VS</div>
                 <div className="w-64 h-64 flex flex-col items-center">
-                    <img className='w-full' src={second_pokemon.data?.sprites?.front_default!} />
-                    <div className='text-center capitalize mt-[-2rem]' >{second_pokemon.data?.name}</div>
+                <Image
+                        src={second_pokemon.data?.sprites?.front_default!} 
+                        width={256}
+                        height={256}
+                        className='w-64 h-64'/>
                     <button className={BTN} onClick={() => vote_for_roundest(second)} >Rounder</button>
                 </div>
             </div>

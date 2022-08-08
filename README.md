@@ -14,7 +14,7 @@ npm run dev
 
 - [ ] Create the results page
 - [ ] Use next/image to handle image caching and better rendering
-   - [ ] { maybe }Move images to Bulbapedia
+   - [ ] { maybe } Move images to Bulbapedia
 
 
 ```
